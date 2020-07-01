@@ -1,0 +1,51 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+  - block:
+    - name: Get info about instance
+      ec2_instance_info:
+        filters:
+          "tag:Role": GoldImageTemplate
+          instance-state-name: running
+      register: ec2
+
+    - name: Get volumes Id
+      set_fact:
+        vol1: "{{ ec2['instances'][0]['block_device_mappings'][0]['ebs']['volume_id'] }}"
+        vol2: "{{ ec2['instances'][0]['block_device_mappings'][2]['ebs']['volume_id'] }}"
+
+    - debug:
+       msg: "Here are the two volume ids {{ vol1 }}, {{ vol1 }}"
+
+    - name: stop the instance
+      ec2:
+        instance_ids:  "{{ ec2.instances[0]['instance_id'] }}"
+        state: stopped
+        region: us-gov-west-1
+        wait: True
+
+    - name: Detach volume from instance {{ ec2.instances[0]['instance_id'] }}
+      ec2_vol:
+        id: "{{ item }}"
+        instance: None
+        region: us-gov-west-1
+      loop:
+       - "{{ vol1 }}"
+       - "{{ vol2 }}"
+
+    - name: Attach {{ vol2 }} to {{ ec2.instances[0]['instance_id'] }} as /dev/sda1
+      ec2_vol:
+       instance: "{{ ec2.instances[0]['instance_id'] }}"
+       id: "{{ vol2 }}"
+       region: us-gov-west-1
+       device_name: /dev/sda1
+       delete_on_termination: yes
+
+    - name: Start the instance
+      ec2:
+        instance_ids:  "{{ ec2.instances[0]['instance_id'] }}"
+        state: running
+        region: us-gov-west-1
+        wait: True
+    delegate_to: localhost

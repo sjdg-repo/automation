@@ -1,0 +1,57 @@
+---
+- hosts: 10.15.85.113
+  become: true
+  tasks:
+
+  - name: add proxy to /etc/yum.con
+    lineinfile:
+      path: /etc/yum.conf
+      line: proxy=http://10.15.96.10:8080
+      state: present
+
+  - name: install lvm2
+    yum:
+      name: lvm2
+      state: present
+
+  - name: Create logical volume group
+    lvg:
+      vg: volGroup00
+      pvs: /dev/xvdb
+
+  - name: create logical partitions
+    lvol:
+      vg: volGroup00
+      lv: "{{ item['name'] }}"
+      size: "{{ item['size'] }}g"
+    loop:
+     - { name: 'logvol-home', size: 10 }
+     - { name: 'logvol-tmp', size: 5 }
+     - { name: 'logvol-var', size: 10 }
+     - { name: 'logvol-var_audit', size: 5 }
+     - { name: 'logvol-var_log', size: 15 }
+
+  - name: Create filesystems on the above partitions
+    filesystem:
+      fstype: xfs
+      dev: "{{ item }}"
+    loop:
+     - /dev/volGroup00/logvol-home
+     - /dev/volGroup00/logvol-tmp
+     - /dev/volGroup00/logvol-var
+     - /dev/volGroup00/logvol-var_audit
+     - /dev/volGroup00/logvol-var_log
+
+  - name: Create /etc/fstab entry for the partitions
+    mount:
+      fstype: xfs
+      path: "{{ item['path'] }}"
+      src: "{{ item['src'] }}"
+      state: present
+    loop:
+     - { path: '/home', src: '/dev/volGroup00/logvol-home' }
+     - { path: '/tmp', src: '/dev/volGroup00/logvol-tmp' }
+     - { path: '/var', src: '/dev/volGroup00/logvol-var' }
+     - { path: '/var/log/', src: '/dev/volGroup00/logvol-var_log' }
+     - { path: '/var/log/audit', src: '/dev/volGroup00/logvol-var_audit' }
+[ansible_svc@10-15-112-161 ~]$

@@ -1,0 +1,32 @@
+
+  - block:
+    - name: Get EC2 Instance infor by tag
+      ec2_instance_info:
+        filters:
+          "tag:Role": GoldImageTemplate
+          instance-state-name: running
+        region: us-gov-west-1
+      register: ec2
+    - debug:
+       msg: "{{ ec2 }}"
+    - name: Create a snapshot from instance block device /dev/sda1
+      ec2_snapshot:
+        description: GoldImageTemplateSnapshot
+        region: us-gov-west-1
+        volume_id: "{{ ec2.instances[0]['block_device_mappings'][0]['ebs']['volume_id'] }}"
+        snapshot_tags:
+          Name: GoldImageTemplateSnapshot
+      register: gits
+
+    - name: Create volume from above snapshot and attach to instance
+      ec2_vol:
+         instance: "{{ ec2.instances[0]['instance_id'] }}"
+         tags:
+           Name: GoldImageTemplateVol
+         snapshot: "{{ gits['snapshot_id'] }}"
+         region: us-gov-west-1
+         volume_type: gp2
+         iops: '100'
+         device_name: /dev/sdc
+      register: sdc
+    delegate_to: localhost

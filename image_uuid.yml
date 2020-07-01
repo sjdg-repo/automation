@@ -1,0 +1,22 @@
+---
+- hosts: 10.15.85.113
+  become: yes
+  tasks:
+  - name: Generate new uuid to be used on sdc2
+    command: uuidgen
+    register: uuid
+
+  - name: change the uuid of /dev/xvdc2
+    shell: |
+      xfs_repair -L /dev/xvdc2
+      xfs_admin -U "{{ uuid['stdout'] }}" /dev/xvdc2
+
+  - name: Run miscellaneous bash script
+    script: /home/ansible_svc/miscellaneous.sh
+
+  - name: get uuid of root volume
+    command: blkid -s UUID -o value /dev/xvda2
+    register: uuid
+
+  - name: reset uuid of /dev/xvdc2
+    shell: xfs_admin -U "{{ uuid.stdout }}" /dev/xvdc2
