@@ -1,6 +1,12 @@
-localhost
-192.168.17.164
-
-[vyperV2]
-localhost
-192.168.17.164
+all: 
+  hosts: 
+    controller.mtroniq.internal
+  children: 
+    webservers:
+      hosts:
+        node1
+        node2
+    dbservers:
+      hosts: 
+        node3 
+        node4
