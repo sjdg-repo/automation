@@ -1,6 +1,6 @@
 all: 
   hosts: 
-    controller.mtroniq.internal
+    controller.mtroniq.internal:
   children: 
     webservers:
       hosts:
