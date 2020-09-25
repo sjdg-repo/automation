@@ -1,0 +1,1 @@
+DaysLeft: "$((90-($(($(date --utc --date "$1" +%s)/86400))-$(grep -h ^ssevalie /etc/shadow | cut -d: -f3))))"
