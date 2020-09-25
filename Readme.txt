@@ -5,5 +5,5 @@ Step to reproduce:
  2. image_api.yml
  3. image_uuid.yml
  3. miscellaneous.sh
- 4. image_ap2.yml
+ 4. image_ap2.ymal
  
