@@ -1,7 +1,7 @@
 hosts: all 
 become: true
 tasks: 
-- name: copy prifile file to root home 
+- name: copy profile file to root home 
   copy: 
     src: bash_profile
     dest: /root/.bash_profile
