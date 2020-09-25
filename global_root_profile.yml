@@ -4,8 +4,8 @@
   - name: copy profile file to root home 
     copy: 
       src: bash_profile
-      dest: /home/ssevalie/.bash_profile
+      dest: /root/.bash_profile
       mode: 0600
-      owner: ssevalie
-      group: ssevalie
-    become_user: ssevalie
+      owner: root
+      group: root
+    become_user: root
