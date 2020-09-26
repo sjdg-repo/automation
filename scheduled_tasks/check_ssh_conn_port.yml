@@ -9,7 +9,7 @@
         port: "{{ ansible_port }}"
         host: "{{ inventory_hostname }}"
         state: started
-        connection_timeout: "5"
+        connect_timeout: "5"
         timeout: "5"
       delegate_to: controller
       ignore_errors: true
@@ -23,7 +23,7 @@
         port: "22"
         host: "{{ inventory_hostname }}"
         state: started
-        connection_timeout: "5"
+        connect_timeout: "5"
         timeout: "5"
       delegate_to: controller
       ignore_errors: true
