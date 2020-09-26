@@ -1,7 +1,7 @@
 ---
 - name: Is ssh listening on 7741?
   hosts: all
-  become: true
+  become: false
   gather_facts: false
   tasks: 
     - block: 
