@@ -18,7 +18,7 @@
       rescue:
         - name: Is ssh listening on default port? 
           wait_for: 
-            port: "22"
+            port: "7741"
             host: "{{ inventory_hostname }}"
             state: started
             connect_timeout: "5"
@@ -37,5 +37,6 @@
             regexp: '^#\s?+Port.*$'
             line: Port 22
           loop: "{{ ssh_config_path }}"
-
+          vars: 
+            - ansible_port: 7741
 
