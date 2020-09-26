@@ -20,7 +20,7 @@
       rescue:
         - name: Is ssh listening on default port? 
           wait_for: 
-            port: ""
+            port: "22"
             host: "{{ inventory_hostname }}"
             state: started
             connect_timeout: "5"
