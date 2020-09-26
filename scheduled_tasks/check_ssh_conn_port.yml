@@ -30,7 +30,7 @@
           register: ssh_default_port
           
         - name: Create a spreadsheet of failed instances 
-          shell: "{{ inventory_hostname }} failed port test >> default_ssh.csv"
-
+          shell: "{{ inventory_hostname }} failed port test >> /tmp/default_ssh.csv"
+          delegate_to: localhost
 
 
