@@ -1,4 +1,2 @@
 ssh_port: 7741
-ssh_config_path:
-  /etc/ssh/sshd_config
-  /etc/ssh/ssh_config
+ssh_config_path: ['/etc/ssh/sshd_config', '/etc/ssh/ssh_config']
