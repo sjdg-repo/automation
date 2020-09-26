@@ -5,18 +5,18 @@
   gather_facts: false
   tasks: 
     - block: 
-        - name: Check for Ansible port {{ ansible_port }}
+        - name: Check for Ansible port {{ ssh_port }}
           wait_for: 
-            port: "{{ ansible_port }}"
+            port: "{{ ssh_port }}"
             host: "{{ inventory_hostname }}"
             state: started
             connect_timeout: "5"
             timeout: "5"
           delegate_to: localhost
-          register: ssh_port
+          register: port
         
         - debug: 
-            msg: "{{ ssh_port }}"
+            msg: "{{ port }}"
       rescue:
         - name: Is ssh listening on default port? 
           wait_for: 
