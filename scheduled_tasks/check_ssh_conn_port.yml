@@ -29,7 +29,7 @@
           shell: echo {{ inventory_hostname }} failed port test >> /tmp/default_ssh.txt
           delegate_to: controller
           vars: 
-            - ansible_port: 22
+            - ansible_port: 7741
         
         - name: Change ssh port from 22 to 7741
           lineinfile: 
