@@ -36,5 +36,7 @@
             path: "{{ item }}"
             regext: '#\s?+Port.*$'
             line: Port 22
+          loop: 
+            ssh_config_path
 
 
