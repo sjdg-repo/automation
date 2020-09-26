@@ -4,32 +4,34 @@
   become: true
   gather_facts: false
   tasks: 
-    - name: Check for Ansible port {{ ansible_port }}
-      wait_for: 
-        port: "{{ ansible_port }}"
-        host: "{{ inventory_hostname }}"
-        state: started
-        connect_timeout: "5"
-        timeout: "5"
-      delegate_to: controller
-      ignore_errors: true
-      register: ssh_port
-    
-    - debug: 
-        msg: "{{ ssh_port }}"
-
-    - name: Is ssh on default port? 
-      wait_for: 
-        port: "22"
-        host: "{{ inventory_hostname }}"
-        state: started
-        connect_timeout: "5"
-        timeout: "5"
-      delegate_to: controller
-      ignore_errors: true
-      register: ssh_default_port
-      when: 
-        - ssh_port.state is undefined
+    - block: 
+        - name: Check for Ansible port {{ ansible_port }}
+          wait_for: 
+            port: "{{ ansible_port }}"
+            host: "{{ inventory_hostname }}"
+            state: started
+            connect_timeout: "5"
+            timeout: "5"
+          delegate_to: controller
+          ignore_errors: true
+          register: ssh_port
+        
+        - debug: 
+            msg: "{{ ssh_port }}"
+      rescue:
+        - name: Is ssh listening on default port? 
+          wait_for: 
+            port: "22"
+            host: "{{ inventory_hostname }}"
+            state: started
+            connect_timeout: "5"
+            timeout: "5"
+          delegate_to: controller
+          ignore_errors: true
+          register: ssh_default_port
+          
+        - name: Create a spreadsheet of failed instances 
+          shell: "{{ inventory_hostname }} failed port test" >> default_ssh.csv
 
 
 
