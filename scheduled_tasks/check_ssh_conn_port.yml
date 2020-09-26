@@ -33,10 +33,10 @@
         
         - name: Change ssh port from 22 to 7741
           lineinfile: 
-            path: /etc/ssh/sshd_config
+            path: "{{ item }}"
             regexp: '^#[\s]?Port.*$'
             line: Port 22
-          #loop: "{{ ssh_config_path }}"
+          loop: "{{ ssh_config_path }}"
           become: true
           vars: 
             - ansible_port: 7741
