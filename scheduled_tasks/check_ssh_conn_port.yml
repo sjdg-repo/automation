@@ -12,7 +12,7 @@
             state: started
             connect_timeout: "5"
             timeout: "5"
-          delegate_to: controller
+          delegate_to: localhost
           ignore_errors: true
           register: ssh_port
         
@@ -26,7 +26,7 @@
             state: started
             connect_timeout: "5"
             timeout: "5"
-          delegate_to: controller
+          delegate_to: localhost
           ignore_errors: true
           register: ssh_default_port
           
