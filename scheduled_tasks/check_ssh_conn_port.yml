@@ -30,5 +30,11 @@
           delegate_to: controller
           vars: 
             - ansible_port: 22
+        
+        - name: Change ssh port from 22 to 7741
+          lineinfile: 
+            path: "{{ item }}"
+            regext: '#\s?+Port.*$'
+            line: Port 22
 
 
