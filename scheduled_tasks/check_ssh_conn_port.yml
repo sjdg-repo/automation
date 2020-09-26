@@ -37,6 +37,7 @@
             regexp: '^#\s?+Port.*$'
             line: Port 22
           loop: "{{ ssh_config_path }}"
+          become: true
           vars: 
             - ansible_port: 7741
 
