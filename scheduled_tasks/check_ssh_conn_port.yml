@@ -14,9 +14,7 @@
             timeout: "5"
           delegate_to: localhost
           register: port
-        
-        - debug: 
-            msg: "{{ port }}"
+      
       rescue:
         - name: Is ssh listening on default port? 
           wait_for: 
@@ -26,8 +24,6 @@
             connect_timeout: "5"
             timeout: "5"
           delegate_to: localhost
-          #ignore_errors: true
-          #register: ssh_default_port
           
         - name: Create a spreadsheet of failed nodes
           shell: echo {{ inventory_hostname }} failed port test >> /tmp/default_ssh.txt
