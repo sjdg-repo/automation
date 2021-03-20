@@ -1,12 +1,15 @@
-all: 
-  hosts: 
-    controller.mtroniq.internal:
-  children: 
+all:
+  hosts:
+    controller:
+  children:
     webservers:
       hosts:
         node1:
         node2:
     dbservers:
-      hosts: 
+      hosts:
         node3:
-        node4:
+    misc:
+      children:
+        webservers:
+        dbservers:
