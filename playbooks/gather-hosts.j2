@@ -1,4 +1,4 @@
-{% 'Host Name', 'Group Name' %}
+{% {{ 'Host Name', 'Group Name'}} %}
 {% for host in groups[groupName] %}
 {{ host }}, {{ groupName }}
 {% endfor %}
