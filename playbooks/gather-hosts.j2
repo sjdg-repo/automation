@@ -1,8 +1,8 @@
 <table style="width:100%", border="1">
 <tr>
-{% for host in groups[groupName] %}
    <th>Host Name</th>
    <th>Group name</th>
+{% for host in groups[groupName] %}
    <td>{{ host }}</td> 
    <td>{{ groupName }}</td>
 {% endfor %}
