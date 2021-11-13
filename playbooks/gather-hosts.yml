@@ -7,4 +7,4 @@
     template: 
       src: gather-hosts.j2
       dest: ~asvc/host-list.txt
-    delegate_to: localhost 
+    delegate_to: node01
