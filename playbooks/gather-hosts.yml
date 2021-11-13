@@ -1,0 +1,9 @@
+---
+- hosts: '*'
+  become: false 
+  tasks: 
+  - name: generate hosts list 
+    template: 
+      src: gather-hosts.j2
+      dest: host-list.txt
+    delegate_to: localhost 
