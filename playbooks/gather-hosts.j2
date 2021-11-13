@@ -1,10 +1,10 @@
 <table style="width:100%", border="1">
-<tr>
-   <th>Host Name</th>
-   <th>Group name</th>
+    <th>Host Name</th>
+    <th>Group name</th>
 {% for host in groups[groupName] %}
-   <td>{{ host }}</td> 
-   <td>{{ groupName }}</td>
+  <tr>
+    <td>{{ host }}</td> 
+    <td>{{ groupName }}</td>
+  </tr>
 {% endfor %}
-</tr>
 </table>
