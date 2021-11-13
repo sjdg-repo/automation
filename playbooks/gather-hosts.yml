@@ -1,6 +1,7 @@
 ---
 - hosts: '*'
   become: false 
+  remote_user: asvc
   tasks: 
   - name: generate hosts list 
     template: 
