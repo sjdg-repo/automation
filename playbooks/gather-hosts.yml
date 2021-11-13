@@ -5,5 +5,5 @@
   - name: generate hosts list 
     template: 
       src: gather-hosts.j2
-      dest: host-list.txt
+      dest: /tmp/host-list.txt
     delegate_to: localhost 
