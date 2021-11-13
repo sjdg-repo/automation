@@ -1,15 +1,20 @@
 all:
   hosts:
-    controller:
+    tower:
+    gitlab-ee:
+    ctrlmgnr:
+    node01:
+    node02:
+    node001:
+    node03:
   children:
-    webservers:
+    app_servers:
       hosts:
-        node1:
-        node2:
-    dbservers:
-      hosts:
-        node3:
+        tower:
+        gitlab-ee:
     misc:
-      children:
-        webservers:
-        dbservers:
+      hosts:
+        node001:
+        node01:
+        node02:
+        node03
