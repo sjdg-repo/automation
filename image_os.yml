@@ -54,4 +54,3 @@
      - { path: '/var', src: '/dev/volGroup00/logvol-var' }
      - { path: '/var/log/', src: '/dev/volGroup00/logvol-var_log' }
      - { path: '/var/log/audit', src: '/dev/volGroup00/logvol-var_audit' }
-[ansible_svc@10-15-112-161 ~]$
