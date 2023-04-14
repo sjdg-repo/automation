@@ -1,5 +1,5 @@
 #!/bin/bash
-# Written by ojp cloud team
+# 
 make_temp_mount () {
         mkdir /mnt/mnt1
         mkdir /mnt/{var,var_log,var_audit,home,tmp}
