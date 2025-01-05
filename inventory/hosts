@@ -10,4 +10,5 @@ all:
         aapdb.technophile.internal: {}
     ungrouped:
       hosts:
-        kvmhost.technophile.internal: {}
+        kvmhost.technophile.internal:
+          ansible_port: 2211
