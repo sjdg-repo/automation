@@ -1,0 +1,13 @@
+all:
+  children:
+    app_tier:
+      hosts:
+        aap.technophile.internal: {}
+        aapeda.technophile.internal: {}
+        aaphub.technophile.internal: {}
+    dbs_tier:
+      hosts:
+        aapdb.technophile.internal: {}
+    ungrouped:
+      hosts:
+        kvmhost.technophile.internal: 2211 {}
