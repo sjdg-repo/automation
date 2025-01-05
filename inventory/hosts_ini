@@ -2,4 +2,4 @@ aap.technophile.internal
 aapeda.technophile.internal
 aaphub.technophile.internal
 aapdb.technophile.internal
-kvmhost.technophile.internal = ansible_port: 2211
+kvmhost.technophile.internal ansible_port=2211
