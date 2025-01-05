@@ -1,21 +1,18 @@
 all:
   hosts:
-    tower:
-    gitlab-ee:
-    ctrlmgnr:
-    node01:
-    node02:
-    node001:
-    node03:
+    aap.technophile.internal:
+    aaphub.technophile.internal:
+    aapeda.technophile.internal:
+    aapdb.technophile.internal:
+    kvmhost.technophile.internal:
   children:
-    app_servers:
+    app_tier:
       hosts:
-        tower:
-        gitlab-ee:
-    misc:
+        aapeda.technophile.internal:
+        aaphub.technophile.internal:
+        aap.technophile.internal:
+    dbs_tier:
       hosts:
-        node001:
-        node01:
-        node02:
-        node03:
-        ctrlmgnr: 
+        aapdb.technophile.internal:
+
+       
