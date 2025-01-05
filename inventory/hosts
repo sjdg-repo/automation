@@ -4,7 +4,7 @@ all:
     aaphub.technophile.internal:
     aapeda.technophile.internal:
     aapdb.technophile.internal:
-    kvmhost.technophile.internal:
+    kvmhost.technophile.internal: 2211
   children:
     app_tier:
       hosts:
