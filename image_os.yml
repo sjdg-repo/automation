@@ -1,13 +1,13 @@
 ---
-- hosts: 10.15.85.113
+- hosts: "{{ env }}"
   become: true
   tasks:
 
-  - name: add proxy to /etc/yum.con
-    lineinfile:
-      path: /etc/yum.conf
-      line: proxy=http://10.15.96.10:8080
-      state: present
+#  - name: add proxy to /etc/yum.con
+#    lineinfile:
+#      path: /etc/yum.conf
+#      line: proxy=http://10.15.96.10:8080
+#      state: present
 
   - name: install lvm2
     yum:
