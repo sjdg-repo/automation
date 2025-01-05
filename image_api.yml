@@ -1,5 +1,6 @@
-
-  - block:
+---
+- hosts: localhost
+  tasks: 
     - name: Get EC2 Instance infor by tag
       ec2_instance_info:
         filters:
@@ -29,4 +30,4 @@
          iops: '100'
          device_name: /dev/sdc
       register: sdc
-    delegate_to: localhost
+    #delegate_to: localhost
