@@ -10,4 +10,4 @@ all:
         aapdb.technophile.internal: {}
     ungrouped:
       hosts:
-        kvmhost.technophile.internal: 2211 {}
+        kvmhost.technophile.internal: {}
