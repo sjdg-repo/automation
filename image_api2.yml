@@ -28,7 +28,8 @@
     - name: Detach volume from instance {{ ec2.instances[0]['instance_id'] }}
       ec2_vol:
         id: "{{ item }}"
-        instance: None
+        #instance: None
+        instance: "{{ ec2.instances[0]['instance_id'] }}"
         region: "{{ region }}"
       loop:
        - "{{ vol1 }}"
