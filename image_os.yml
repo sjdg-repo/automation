@@ -10,17 +10,17 @@
 #      state: present
 
   - name: install lvm2
-    yum:
+    ansible.builtin.yum:
       name: lvm2
       state: present
 
   - name: Create logical volume group
-    lvg:
+    community.general.lvg:
       vg: volGroup00
       pvs: /dev/xvdb
 
   - name: create logical partitions
-    lvol:
+    community.general.lvol:
       vg: volGroup00
       lv: "{{ item['name'] }}"
       size: "{{ item['size'] }}g"
@@ -32,7 +32,7 @@
      - { name: 'logvol-var_log', size: 15 }
 
   - name: Create filesystems on the above partitions
-    filesystem:
+    ansible.builtin.filesystem:
       fstype: xfs
       dev: "{{ item }}"
     loop:
@@ -43,7 +43,7 @@
      - /dev/volGroup00/logvol-var_log
 
   - name: Create /etc/fstab entry for the partitions
-    mount:
+    ansible.posix.mount:
       fstype: xfs
       path: "{{ item['path'] }}"
       src: "{{ item['src'] }}"
