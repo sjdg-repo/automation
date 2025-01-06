@@ -29,7 +29,7 @@
          snapshot: "{{ gits['snapshot_id'] }}"
          region: "{{ region }}"
          volume_type: gp2
-         iops: '100'
+         #iops: '100'
          device_name: /dev/sdc
       register: sdc
     #delegate_to: localhost
