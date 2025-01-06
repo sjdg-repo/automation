@@ -22,14 +22,14 @@
       ec2:
         instance_ids:  "{{ ec2.instances[0]['instance_id'] }}"
         state: stopped
-        region: us-gov-west-1
+        region: "{{ region }}
         wait: True
 
     - name: Detach volume from instance {{ ec2.instances[0]['instance_id'] }}
       ec2_vol:
         id: "{{ item }}"
         instance: None
-        region: us-gov-west-1
+        region: "{{ region }}"
       loop:
        - "{{ vol1 }}"
        - "{{ vol2 }}"
@@ -38,7 +38,7 @@
       ec2_vol:
        instance: "{{ ec2.instances[0]['instance_id'] }}"
        id: "{{ vol2 }}"
-       region: us-gov-west-1
+       region: "{{ region }}"
        device_name: /dev/sda1
        delete_on_termination: yes
 
@@ -46,6 +46,6 @@
       ec2:
         instance_ids:  "{{ ec2.instances[0]['instance_id'] }}"
         state: running
-        region: us-gov-west-1
+        region: "{{ region }}"
         wait: True
     delegate_to: localhost
