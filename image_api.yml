@@ -2,7 +2,7 @@
 - hosts: localhost
   tasks: 
     - name: Get EC2 Instance infor by tag
-      amazon.ec2_instance_info:
+      amazon.aws.ec2_instance_info:
         filters:
           "tag:Role": GoldImageTemplate
           instance-state-name: running
