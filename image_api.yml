@@ -2,16 +2,18 @@
 - hosts: localhost
   tasks: 
     - name: Get EC2 Instance infor by tag
-      ec2_instance_info:
+      amazon.ec2_instance_info:
         filters:
           "tag:Role": GoldImageTemplate
           instance-state-name: running
         region: "{{ region }}"
       register: ec2
-    - debug:
+      
+    - ansible.builtin.debug:
        msg: "{{ ec2 }}"
+       
     - name: Create a snapshot from instance block device /dev/sda1
-      ec2_snapshot:
+      amazon.aws.ec2_snapshot:
         description: GoldImageTemplateSnapshot
         region: "{{ region }}"
         volume_id: "{{ ec2.instances[0]['block_device_mappings'][0]['ebs']['volume_id'] }}"
@@ -20,7 +22,7 @@
       register: gits
 
     - name: Create volume from above snapshot and attach to instance
-      ec2_vol:
+      amazon.aws.ec2_vol:
          instance: "{{ ec2.instances[0]['instance_id'] }}"
          tags:
            Name: GoldImageTemplateVol
