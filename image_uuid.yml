@@ -1,5 +1,5 @@
 ---
-- hosts: 10.15.85.113
+- hosts: "{{ env }}"
   become: yes
   tasks:
   - name: Generate new uuid to be used on sdc2
