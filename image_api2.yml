@@ -5,10 +5,10 @@
   - block:
     - name: Get info about instance
       amazon.aws.ec2_instance_info:
+        region: "{{ region }}"
         filters:
           "tag:Role": GoldImageTemplate
           instance-state-name: running
-          region: "{{ region }}"
       register: ec2
 
     - name: Get volumes Id
