@@ -1,10 +1,11 @@
 ---
 - hosts: localhost
   region: "us-east-1"
+  ids: ['i-00051e115e3ca8063']
   tasks:
   - name: check current state of the instance  
     amazon.aws.ec2_instance_info:
-       instance_ids: i-00051e115e3ca8063
+       instance_ids: "{{ ids }}"
        region: "{{ region }}"
          #   filters:
          #instance-state-name: running
@@ -15,7 +16,7 @@
 
   - name: stop instance conditionally
     amazon.aws.ec2_instance:
-      instance_ids: i-00051e115e3ca8063
+      instance_ids: "{{ ids }}"
       region: "{{ region }}"
       state: stopped
     when: instance_state.instances[0]['state']['name'] == 'running'
@@ -23,6 +24,6 @@
   - name: start the instance if stopped
     amazon.aws.ec2_instance:
       region: "{{ region }}"
-      instance_ids: i-00051e115e3ca8063
+      instance_ids: "{{ ids }}"
       state: started
     when: instance_state.instances[0]['state']['name'] == 'stopped'
