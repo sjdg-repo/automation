@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  tasks:
+  - name: check instance state
+    amazon.aws.ec2_instance_info:
+       instance_ids: i-00051e115e3ca8063
+       region: us-east-1
+         #   filters:
+         #instance-state-name: running
+    register: instance_state
+
+#  - debug:
+#      var: instance_state.instances[0]['state']
+
+  - name: stop instance conditionally
+    amazon.aws.ec2_instance:
+      instance_ids: i-00051e115e3ca8063
+      region: us-east-1
+      state: stopped
+    when: instance_state.instances[0]['state']['name'] == 'running'
+
+  - name: start the instance if stopped
+    amazon.aws.ec2_instance:
+      region: us-east-1
+      instance_ids: i-00051e115e3ca8063
+      state: started
+    when: instance_state.instances[0]['state']['name'] == 'stopped'
