@@ -2,29 +2,28 @@
 - hosts: localhost
   vars:
     region: "us-east-1"
-    ids: ['i-00051e115e3ca8063']
   tasks:
-  - name: check current state of the instance  
+ - name: check instance state
     amazon.aws.ec2_instance_info:
-       instance_ids: "{{ ids }}"
-       region: "{{ region }}"
-         #   filters:
-         #instance-state-name: running
+       region: us-east-1
+       filters:
+         "tag:Role": "GoldImageTemplate"
+         "tag:OS_Type": "Linux"
     register: instance_state
 
-#  - debug:
-#      var: instance_state.instances[0]['state']
+ # - debug:
+ #    var: instance_state.instances[0]['instance_id']
 
   - name: stop instance conditionally
     amazon.aws.ec2_instance:
-      instance_ids: "{{ ids }}"
-      region: "{{ region }}"
+      instance_ids: "{{ instance_state.instances[0]['instance_id'] }}"
+      region: us-east-1
       state: stopped
     when: instance_state.instances[0]['state']['name'] == 'running'
 
   - name: start the instance if stopped
     amazon.aws.ec2_instance:
-      region: "{{ region }}"
-      instance_ids: "{{ ids }}"
+      region: us-east-1
+      instance_ids: "{{ instance_state.instances[0]['instance_id'] }}"
       state: started
     when: instance_state.instances[0]['state']['name'] == 'stopped'
