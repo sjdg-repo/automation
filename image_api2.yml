@@ -51,3 +51,7 @@
         region: "{{ region }}"
         wait: True
     delegate_to: localhost
+
+    - name: this is just to pass on the variable to the next template.
+      set_fact: 
+        ins_id: "{{ instance_state.instances[0]['instance_id'] }}"
