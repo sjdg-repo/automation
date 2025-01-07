@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   tasks:
-  - name: check instance state
+  - name: check current state of the instance  
     amazon.aws.ec2_instance_info:
        instance_ids: i-00051e115e3ca8063
        region: us-east-1
