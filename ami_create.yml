@@ -7,5 +7,20 @@
     amazon.aws.ec2_ami:
       delete_snapshot: true
       description: This image will be used as a template for RHEL 8 builds
-      instance_id: 
+      instance_id: "{{ ins_id }}"
+      name: 'RHEL8_IMAGE_WITH_PARTITIONS_DEFINED'
+      region: "{{ region }}"
+      tags: { 
+      Name: 'RHEL8 GOLD IMAGE WITH DEFINED PARTIIIONS',
+      OS_Type: 'Linux',
+      Role: 'GOLDIMAGE',
+      POC: Sylvester.Sevalie@usdoj.gov
+      }
+      wait: true
+      
+    
+      
+      
+      
+      
     
