@@ -1,7 +1,8 @@
 ---
 - hosts: localhost
-  region: "us-east-1"
-  ids: ['i-00051e115e3ca8063']
+  vars:
+    region: "us-east-1"
+    ids: ['i-00051e115e3ca8063']
   tasks:
   - name: check current state of the instance  
     amazon.aws.ec2_instance_info:
