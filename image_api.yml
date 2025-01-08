@@ -1,6 +1,5 @@
 ---
-#- hosts: localhost
-- hosts: "{{ env }}"
+- hosts: localhost
   tasks: 
     - name: Get EC2 Instance info by tag
       amazon.aws.ec2_instance_info:
