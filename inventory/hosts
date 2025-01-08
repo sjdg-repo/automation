@@ -6,7 +6,7 @@ all:
         aapeda.technophile.internal: {}
         aaphub.technophile.internal: {}
         34.206.118.212:  {}
-        54.92.247.95  {}
+        54.92.247.95:  {}
     dbs_tier:
       hosts:
         aapdb.technophile.internal: {}
