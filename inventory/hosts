@@ -6,6 +6,7 @@ all:
         aapeda.technophile.internal: {}
         aaphub.technophile.internal: {}
         34.206.118.212:  {}
+        54.92.247.95  {}
     dbs_tier:
       hosts:
         aapdb.technophile.internal: {}
@@ -14,3 +15,4 @@ all:
         kvmhost.technophile.internal:
           ansible_port: 2211
         34.206.118.212: 
+        54.92.247.95:
