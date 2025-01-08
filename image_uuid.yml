@@ -5,36 +5,36 @@
   - name: Generate new uuid to be used on sdc2
     ansible.builtin.command: uuidgen
     register: uuid
-  block: 
-      - name: change the uuid of /dev/xvdc2 for rhel 8 and below
-        ansible.builtin.shell: |
-          #xfs_repair -L /dev/xvdc2
-          xfs_admin -U "{{ uuid['stdout'] }}" /dev/xvdc2
+    block: 
+        - name: change the uuid of /dev/xvdc2 for rhel 8 and below
+          ansible.builtin.shell: |
+            #xfs_repair -L /dev/xvdc2
+            xfs_admin -U "{{ uuid['stdout'] }}" /dev/xvdc2
+        
+        - name: Run miscellaneous bash script
+          ansible.builtin.script: miscellaneous.sh
       
+        - name: get uuid of root volume
+          ansible.builtin.command: blkid -s UUID -o value /dev/xvda2
+          register: uuid
+      
+        - name: reset uuid of /dev/xvdc2
+          ansible.builtin.shell: xfs_admin -U "{{ uuid.stdout }}" /dev/xvdc2
+    when: ansible_distribution_major_version | int >= 8
+    
+    block: 
+      - name: change the uuid of /dev/xvdc3 for rhel 9 and above 
+        ansible.builtin.shell: |
+          xfs_repair -L /dev/xvdc3
+          xfs_admin -U "{{ uuid['stdout'] }}" /dev/xvdc3
+    
       - name: Run miscellaneous bash script
         ansible.builtin.script: miscellaneous.sh
     
       - name: get uuid of root volume
-        ansible.builtin.command: blkid -s UUID -o value /dev/xvda2
+        ansible.builtin.command: blkid -s UUID -o value /dev/xvda3
         register: uuid
     
-      - name: reset uuid of /dev/xvdc2
-        ansible.builtin.shell: xfs_admin -U "{{ uuid.stdout }}" /dev/xvdc2
-  when: ansible_distribution_major_version | int >= 8
-  
-  block: 
-    - name: change the uuid of /dev/xvdc3 for rhel 9 and above 
-      ansible.builtin.shell: |
-        xfs_repair -L /dev/xvdc3
-        xfs_admin -U "{{ uuid['stdout'] }}" /dev/xvdc3
-  
-    - name: Run miscellaneous bash script
-      ansible.builtin.script: miscellaneous.sh
-  
-    - name: get uuid of root volume
-      ansible.builtin.command: blkid -s UUID -o value /dev/xvda3
-      register: uuid
-  
-    - name: reset uuid of /dev/xvdc3
-      ansible.builtin.shell: xfs_admin -U "{{ uuid.stdout }}" /dev/xvdc3
-  when: ansible_distribution_major_version | int >= 9
+      - name: reset uuid of /dev/xvdc3
+        ansible.builtin.shell: xfs_admin -U "{{ uuid.stdout }}" /dev/xvdc3
+    when: ansible_distribution_major_version | int >= 9
