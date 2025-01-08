@@ -5,7 +5,7 @@
   - name: Generate new uuid to be used on sdc2
     ansible.builtin.command: uuidgen
     register: uuid
-    block: 
+  - block: 
         - name: change the uuid of /dev/xvdc2 for rhel 8 and below
           ansible.builtin.shell: |
             #xfs_repair -L /dev/xvdc2
