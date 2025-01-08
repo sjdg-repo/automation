@@ -52,6 +52,6 @@
         wait: True
     delegate_to: localhost
 
-  - name: this is just to pass on the instance ID to the next template.
-    set_fact: 
-      ins_id: "{{ ec2.instances[0]['instance_id'] }}"
+#  - name: this is just to pass on the instance ID to the next template.
+#    set_fact: 
+#      ins_id: "{{ ec2.instances[0]['instance_id'] }}"
