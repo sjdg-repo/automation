@@ -2,7 +2,7 @@
 - hosts: "{{ env }}"
   become: yes
   tasks:
-  - name: Generate new uuid to be used on sdc2
+  - name: Generate new uuid to be used on /boot device
     ansible.builtin.command: uuidgen
     register: uuid
   - block: 
