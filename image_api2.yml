@@ -54,5 +54,6 @@
 
   - name: this is just to pass on the instance ID to the next template.
     set_stats:
-      ins_id: "{{ ec2.instances[0]['instance_id'] }}"
+      data:
+        ins_id: "{{ ec2.instances[0]['instance_id'] }}"
 
