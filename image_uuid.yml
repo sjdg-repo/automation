@@ -6,6 +6,7 @@
     ansible.builtin.command: uuidgen
     register: uuid
   - block: 
+    - block: 
         - name: change the uuid of /dev/xvdc2 for rhel 8 and below
           ansible.builtin.shell: |
             xfs_repair -L /dev/xvdc2
@@ -20,7 +21,7 @@
       
         - name: reset uuid of /dev/xvdc2
           ansible.builtin.shell: xfs_admin -U "{{ uuid.stdout }}" /dev/xvdc2
-    #when: ansible_distribution_major_version | int >= 8
+      when: ansible_distribution_major_version | int <= 7
     rescue: 
       - name: change the uuid of /dev/xvdc3 for rhel 9 and above 
         ansible.builtin.shell: |
@@ -36,4 +37,4 @@
     
       - name: reset uuid of /dev/xvdc3
         ansible.builtin.shell: xfs_admin -U "{{ uuid.stdout }}" /dev/xvdc3
-    when: ansible_distribution_major_version | int >= 9
+    when: ansible_distribution_major_version | int >= 8
