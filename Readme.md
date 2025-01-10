@@ -3,3 +3,4 @@
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">sylsevalie@gmail.com</p>
+<p align="left">https://www.linkedin.com/in/sylvester-sevalie-39925564/</p>
