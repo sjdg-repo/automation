@@ -17,7 +17,7 @@
         vol2: "{{ ec2['instances'][0]['block_device_mappings'][2]['ebs']['volume_id'] }}"
 
     - ansible.builtin.debug:
-       msg: "Here are the two volume ids {{ vol1 }}, {{ vol1 }}"
+       msg: "Here are the two volume ids {{ vol1 }}, {{ vol2 }}"
 
     - name: stop the instance
       amazon.aws.ec2_instance:
