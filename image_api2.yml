@@ -56,4 +56,5 @@
     set_stats:
       data:
         ins_id: "{{ ec2.instances[0]['instance_id'] }}"
+        vol2: "{{ ec2['instances'][0]['block_device_mappings'][2]['ebs']['volume_id'] }}"
 
