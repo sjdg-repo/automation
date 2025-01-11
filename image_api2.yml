@@ -26,16 +26,6 @@
         region: "{{ region }}"
         wait: True
 
-#   # - name: Detach volume from instance {{ ec2.instances[0]['instance_id'] }}
-#   #   amazon.aws.ec2_vol:
-#   #     id: "{{ item }}"
-#   #     #instance: None
-#   #     instance: "{{ ec2.instances[0]['instance_id'] }}"
-#   #     region: "{{ region }}"
-#   #   loop:
-#   #    - "{{ vol1 }}"
-#   #    - "{{ vol2 }}"
-
     - name: Attach {{ vol2 }} to {{ ec2.instances[0]['instance_id'] }} as /dev/sda1
       amazon.aws.ec2_vol:
        instance: "{{ ec2.instances[0]['instance_id'] }}"
