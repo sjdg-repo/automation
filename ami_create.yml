@@ -4,11 +4,11 @@
     region: us-east-1
   tasks: 
   - name: Detach volume from instance {{ ec2.instances[0]['instance_id'] }}
-      amazon.aws.ec2_vol:
-        id: "{{ item }}"
-        #instance: None
-        instance: "{{ ec2.instances[0]['instance_id'] }}"
-        region: "{{ region }}"
+    amazon.aws.ec2_vol:
+      id: "{{ item }}"
+      instance: None
+      instance: "{{ ec2.instances[0]['instance_id'] }}"
+      region: "{{ region }}"
         
   - name: "{{'Default RHEL 8 Image with partitions defined' | upper}}"
     amazon.aws.ec2_ami:
