@@ -15,7 +15,7 @@
       delete_snapshot: true
       description: This image will be used as a template for RHEL 8 builds
       instance_id: "{{ ins_id }}"
-      name: 'RHEL8_IMAGE_WITH_PARTITIONS_DEFINED'
+      name: 'RHEL9_IMAGE_WITH_PARTITIONS_DEFINED'
       region: "{{ region }}"
       tags: { 
       Name: 'RHEL8 GOLD IMAGE WITH DEFINED PARTIIIONS',
