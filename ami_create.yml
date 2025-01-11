@@ -7,7 +7,7 @@
     amazon.aws.ec2_vol:
       id: "{{ vol2 }}"
       instance: None
-      instance: "{{ ins_id }}"
+      #instance: "{{ ins_id }}"
       region: "{{ region }}"
         
   - name: "{{'Default RHEL 8 Image with partitions defined' | upper}}"
