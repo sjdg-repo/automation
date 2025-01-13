@@ -20,6 +20,7 @@
       region: us-east-1
       state: stopped
     when: instance_state.instances[0]['state']['name'] == 'running'
+    tags: stopped
     
   - name: start the instance if stopped
     amazon.aws.ec2_instance:
@@ -27,3 +28,4 @@
       instance_ids: "{{ instance_state.instances[0]['instance_id'] }}"
       state: started
     when: instance_state.instances[0]['state']['name'] == 'stopped'
+    tags: running
